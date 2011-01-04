@@ -57,6 +57,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_COPY_FILES += \
     device/htc/dream-sapphire/media_profiles.xml:/system/etc/media_profiles.xml
 
+# boot scripts
+PRODUCT_COPY_FILES += \
+    device/htc/dream-sapphire/prebuilt/bin/sysinit.rc:/system/bin/sysinit.rc
+    device/htc/dream-sapphire/prebuilt/etc/init.d/03firstboot:/system/etc/init.d/03firstboot
+    device/htc/dream-sapphire/prebuilt/etc/init.d/05mountsd:/system/etc/init.d/05mountsd
+    device/htc/dream-sapphire/prebuilt/etc/init.d/10apps2sd:/system/etc/init.d/10apps2sd
+    device/htc/dream-sapphire/prebuilt/etc/init.d/20userinit:/system/etc/init.d/20userinit
 
 # proprietary side of the device
 $(call inherit-product-if-exists, vendor/htc/dream-sapphire/device_dream_sapphire-vendor.mk)
