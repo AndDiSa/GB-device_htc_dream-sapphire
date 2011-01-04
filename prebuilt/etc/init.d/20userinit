@@ -8,6 +8,6 @@ fi
 for userinit in $SD_EXT_DIRECTORY/userinit.d /data/local/userinit.d;do
     if [ -d $userinit ];
     then
-       logwrapper busybox run-parts $SD_EXT_DIRECTORY/userinit.d
+       logwrapper busybox run-parts $userinit
     fi
 done
