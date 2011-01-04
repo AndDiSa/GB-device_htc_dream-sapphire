@@ -18,6 +18,6 @@ then
             log -p i -t a2sd "$SD_EXT_DIRECTORY/$i created"
         fi
     done
-    setprop m.a2sd.active 1
+    setprop magpie.a2sd.active 1
     log -p i -t a2sd "Apps2SD successfully activated"
 fi
