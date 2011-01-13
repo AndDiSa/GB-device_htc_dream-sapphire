@@ -64,6 +64,7 @@ PRODUCT_COPY_FILES += \
     device/htc/dream-sapphire/prebuilt/bin/sysinit.rc:/system/bin/sysinit.rc \
     device/htc/dream-sapphire/prebuilt/etc/init.d/00banner:/system/etc/init.d/00banner \
     device/htc/dream-sapphire/prebuilt/etc/init.d/03firstboot:/system/etc/init.d/03firstboot \
+    device/htc/dream-sapphire/prebuilt/etc/init.d/04sys_dex_loc:/system/etc/init.d/04sys_dex_loc \
     device/htc/dream-sapphire/prebuilt/etc/init.d/05mountsd:/system/etc/init.d/05mountsd \
     device/htc/dream-sapphire/prebuilt/etc/init.d/10apps2sd:/system/etc/init.d/10apps2sd \
     device/htc/dream-sapphire/prebuilt/etc/init.d/20userinit:/system/etc/init.d/20userinit
