@@ -31,15 +31,16 @@ CheckSysDexSize ()
 # Avoid this with experimental var, this way only those who "understand" will turn it on
 # at least until I bloat this even more, to account for new apks/jars on system
 
-SysDexSize=$(du -c /data/dalvik-cache/system@* |awk '/total/ {print $1 * 1024}')
+SysDexOnDataSize=$(du -c /data/dalvik-cache/system@* |awk '/total/ {print $1 * 1024}')
+SysDexOnCacheSize=$(du -c /cache/dalvik-cache/system@* |awk '/total/ {print $1 * 1024}')
 SafetyMargin=1048576 # 1mb saftey margin
 FreeCacheSize=$(df |awk '$6 == "/cache" {print $4 * 1024}')
 
-if [ "$SysDexSize" = "0" ];
+if [ "$SysDexOnCacheSize" = "0" -a "$SysDexOnCacheSize" = "0" ];
 then
-    # either it is the first boot or we already moved dex
+    # Assume firstboot
     TestCacheSize
-elif [ "`expr $SysDexSize + $SafetyMargin`" -lt "$FreeCacheSize" ];
+elif [ "`expr $SysDexOnDataSize + $SafetyMargin`" -lt "$FreeCacheSize" ];
 then
     sysdexOnCache
     # hmm, if they didn't wipe system dex might be artifically too small
