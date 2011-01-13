@@ -37,7 +37,7 @@ SysDexSize=$(expr $SysDexOnDataSize + $SysDexOnCacheSize)
 SafetyMargin=1048576 # 1mb saftey margin
 FreeCacheSize=$(df |awk '$6 == "/cache" {print $4 * 1024}')
 
-if [ "$SysDexSize" = "0" ];
+if [ "$SysDexOnCacheSize" = "0" -a "$SysDexOnCacheSize" = "0" ];
 then
     # Assume firstboot
     TestCacheSize
