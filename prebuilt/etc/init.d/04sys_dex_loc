@@ -13,6 +13,7 @@ alias printf="busybox printf"
 alias awk="busybox awk"
 alias mv="busybox mv"
 alias du="busybox du"
+alias df="busybox df"
 
 # 35mb in bytes
 MinCacheSize=36700160
