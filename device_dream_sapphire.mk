@@ -55,10 +55,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.opengles.version=65536
 
-# keep system dex on data
-# TODO determine real /cache size and use it if large enough
-PRODUCT_PROPERTY_OVERRIDES += \
-    dalvik.vm.dexopt-data-only=1
 # media configuration xml file
 PRODUCT_COPY_FILES += \
     device/htc/dream-sapphire/media_profiles.xml:/system/etc/media_profiles.xml
