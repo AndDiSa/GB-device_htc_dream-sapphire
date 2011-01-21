@@ -1,5 +1,18 @@
 #!/system/bin/sh
 # 2010-08-05 Firerat, bind mount cache to sd ext partition, and mount mtdblock4 for Clockwork recovery's use
+
+# 2011-01-20 Firerat
+# check if we need to bind mount cache ( i.e. /cache has been shrunk with customMTD )
+# get cache size ( bytes ) from /proc/mtd
+CacheSizeBytes=$(printf %d `awk '/cache/ {print "0x"$2}' /proc/mtd`)
+if [ "$CacheSizeBytes" -gt "28311551" ];
+then
+    # 28311552 is 27mb ( cache size of 1.33.0013d )
+    # if it is less than that we assume customMTD has been used and cache is probably very small
+    # thus we need to run the rest of the script
+    # if not, just exit
+    exit
+fi
 busybox umount /cache
 # Bind mount /sd-ext/cache ( or /system/sd/cache ) to /cache
 if [ "`busybox egrep -q "sd-ext|/system/sd" /proc/mounts;echo $?`" = "0" ];
