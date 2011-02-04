@@ -27,7 +27,21 @@ PRODUCT_COPY_FILES := \
     frameworks/base/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
     frameworks/base/data/etc/android.software.sip.xml:system/etc/permissions/android.software.sip.xml
 
-PRODUCT_PROPERTY_OVERRIDES := \
+#copy default modules.
+PRODUCT_COPY_FILES += \
+    device/htc/dream-sapphire/kernel/2708-modules.sqf:system/lib/modules/modules.sqf
+
+#Copy init.d scripts
+PRODUCT_COPY_FILES += \
+    device/htc/dream-sapphire/prebuilt/etc/init.d/04modules:system/etc/init.d/04modules
+
+#Copy audio profiles
+PRODUCT_COPY_FILES += \
+    device/htc/dream-sapphire/prebuilt/etc/.audio/AudioPara_TMUS_DREA.csv.gz:system/etc/.audio/AudioPara_TMUS_DREA.csv.gz \
+    device/htc/dream-sapphire/prebuilt/etc/.audio/AudioPara_TMUS_SAPP.csv.gz:system/etc/.audio/AudioPara_TMUS_SAPP.csv.gz \
+    device/htc/dream-sapphire/prebuilt/etc/.audio/AudioPara_VODA_SAPP.csv.gz:system/etc/.audio/AudioPara_VODA_SAPP.csv.gz
+
+PRODUCT_PROPERTY_OVERRIDES += \
     ro.media.dec.jpeg.memcap=10000000
 
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -53,7 +67,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # The OpenGL ES API level that is natively supported by this device.
 # This is a 16.16 fixed point number
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.opengles.version=65536
+    ro.opengles.version=65537
 
 # media configuration xml file
 PRODUCT_COPY_FILES += \
@@ -68,6 +82,15 @@ PRODUCT_COPY_FILES += \
     device/htc/dream-sapphire/prebuilt/etc/init.d/05mountsd:/system/etc/init.d/05mountsd \
     device/htc/dream-sapphire/prebuilt/etc/init.d/10apps2sd:/system/etc/init.d/10apps2sd \
     device/htc/dream-sapphire/prebuilt/etc/init.d/20userinit:/system/etc/init.d/20userinit
+
+#System module location (for busybox modprobe)
+KERNEL_MODULES_DIR=/system/lib/modules
+
+#Use v8 Javascript engine
+JS_ENGINE := v8
+
+#use armv6j code
+TARGET_ARCH_VARIANT := armv6j
 
 # proprietary side of the device
 $(call inherit-product-if-exists, vendor/htc/dream-sapphire/device_dream_sapphire-vendor.mk)

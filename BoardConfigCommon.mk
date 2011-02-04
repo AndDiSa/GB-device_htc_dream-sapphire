@@ -64,7 +64,13 @@ BOARD_EGL_CFG := device/htc/dream-sapphire/egl.cfg
 CYANOGEN_BIONIC := true
 
 # No fallback font by default (space savings)
-NO_FALLBACK_FONT:=true
+# NO_FALLBACK_FONT:=true
+
+#Use busybox over toolbox
+TINY_TOOLBOX := true
+
+#Busybox sh is perfered over toolbox
+SKIP_SH_BUILD_USE_BB := true
 
 TARGET_RECOVERY_UPDATER_LIBS += librecovery_updater_htc
 

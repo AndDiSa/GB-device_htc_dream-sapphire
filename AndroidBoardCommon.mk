@@ -15,7 +15,9 @@
 LOCAL_PATH := $(call my-dir)
 
 ifeq ($(TARGET_PREBUILT_KERNEL),)
-TARGET_PREBUILT_KERNEL := $(LOCAL_PATH)/kernel
+TARGET_PREBUILT_KERNEL := $(LOCAL_PATH)/kernel/2708-zImage
+BUILD_TARGET_EXTRA_OTABOOT_INSTALL_SCRIPT := \
+    $(LOCAL_PATH)/kernel/edifyinstall.py
 endif
 
 file := $(INSTALLED_KERNEL_TARGET)
@@ -31,6 +33,11 @@ ALL_PREBUILT += $(file)
 $(file) : $(LOCAL_PATH)/h2w_headset.kl | $(ACP)
 	$(transform-prebuilt-to-target)
 
+file := $(TARGET_ROOT_OUT)/sbin/sysinit.rc
+ALL_PREBUILT += $(file)
+$(file) : $(LOCAL_PATH)/prebuilt/sbin/sysinit.rc | $(ACP)
+	$(transform-prebuilt-to-target)
+
 include $(CLEAR_VARS)
 LOCAL_MODULE_CLASS := ETC
 LOCAL_MODULE := vold.fstab
@@ -38,12 +45,5 @@ LOCAL_MODULE_TAGS := debug optional
 LOCAL_SRC_FILES := $(LOCAL_MODULE)
 include $(BUILD_PREBUILT)
 
-include $(CLEAR_VARS)
-LOCAL_MODULE := wlan.ko
-LOCAL_MODULE_TAGS := debug optional
-LOCAL_MODULE_CLASS := ETC
-LOCAL_MODULE_PATH := $(TARGET_OUT)/lib/modules
-LOCAL_SRC_FILES := $(LOCAL_MODULE)
-include $(BUILD_PREBUILT)
 
 -include vendor/htc/dream-sapphire/AndroidBoardCommonVendor.mk
