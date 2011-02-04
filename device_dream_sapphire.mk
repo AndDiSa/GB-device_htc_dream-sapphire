@@ -23,7 +23,7 @@ PRODUCT_COPY_FILES := \
     frameworks/base/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
     frameworks/base/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
     frameworks/base/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
-    frameworks/base/data/etc/android.hardware.touchscreen.multitouch.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.xml \
+    frameworks/base/data/etc/android.hardware.touchscreen.multitouch.distinct.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.distinct.xml \
     frameworks/base/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
     frameworks/base/data/etc/android.software.sip.xml:system/etc/permissions/android.software.sip.xml
 
@@ -75,11 +75,12 @@ PRODUCT_COPY_FILES += \
 
 # boot scripts
 PRODUCT_COPY_FILES += \
-    device/htc/dream-sapphire/prebuilt/bin/sysinit.rc:/system/bin/sysinit.rc \
     device/htc/dream-sapphire/prebuilt/etc/init.d/00banner:/system/etc/init.d/00banner \
     device/htc/dream-sapphire/prebuilt/etc/init.d/03firstboot:/system/etc/init.d/03firstboot \
+    device/htc/dream-sapphire/prebuilt/etc/init.d/04modules:/system/etc/init.d/04modules \
     device/htc/dream-sapphire/prebuilt/etc/init.d/04sys_dex_loc:/system/etc/init.d/04sys_dex_loc \
     device/htc/dream-sapphire/prebuilt/etc/init.d/05mountsd:/system/etc/init.d/05mountsd \
+    device/htc/dream-sapphire/prebuilt/etc/init.d/06BindCache:/system/etc/init.d/06BindCache \
     device/htc/dream-sapphire/prebuilt/etc/init.d/10apps2sd:/system/etc/init.d/10apps2sd \
     device/htc/dream-sapphire/prebuilt/etc/init.d/20userinit:/system/etc/init.d/20userinit
 

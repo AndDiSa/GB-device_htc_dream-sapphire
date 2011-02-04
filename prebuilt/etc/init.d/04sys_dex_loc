@@ -74,6 +74,7 @@ then
     sed '/dalvik.vm.dexopt-data-only/ d' -i /system/build.prop
     echo "dalvik.vm.dexopt-data-only=1" >> /system/build.prop
     mountsystem ro
+    setprop dalvik.vm.dexopt-data-only 1
 fi
 return
 }
@@ -86,6 +87,7 @@ then
     mountsystem rw
     sed '/dalvik.vm.dexopt-data-only/ d' -i /system/build.prop
     mountsystem ro
+    setprop dalvik.vm.dexopt-data-only 0
 fi
 # need to make sure dir exists
 if [ ! -d "/cache/dalvik-cache" ];
