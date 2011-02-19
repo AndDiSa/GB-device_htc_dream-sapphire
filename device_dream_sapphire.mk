@@ -49,7 +49,8 @@ PRODUCT_COPY_FILES += \
     device/htc/dream-sapphire/prebuilt/bin/fix_permissions:system/bin/fix_permissions \
     device/htc/dream-sapphire/prebuilt/xbin/rzscontrol:system/xbin/rzscontrol \
     device/htc/dream-sapphire/prebuilt/bin/compcache:system/bin/compcache \
-    device/htc/dream-sapphire/prebuilt/bin/handle_compcache:system/bin/handle_compcache
+    device/htc/dream-sapphire/prebuilt/bin/handle_compcache:system/bin/handle_compcache \
+    device/htc/dream-sapphire/prebuilt/etc/init.local.rc:system/etc/init.local.rc
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.media.dec.jpeg.memcap=10000000
