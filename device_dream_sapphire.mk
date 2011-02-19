@@ -16,6 +16,9 @@
 
 DEVICE_PACKAGE_OVERLAYS := device/htc/dream-sapphire/overlay
 
+PRODUCT_PACKAGES := \
+    bash
+
 # Install the features available on this device.
 PRODUCT_COPY_FILES := \
     frameworks/base/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
@@ -86,8 +89,8 @@ PRODUCT_COPY_FILES += \
     device/htc/dream-sapphire/prebuilt/etc/init.d/00banner:/system/etc/init.d/00banner \
     device/htc/dream-sapphire/prebuilt/etc/init.d/03firstboot:/system/etc/init.d/03firstboot \
     device/htc/dream-sapphire/prebuilt/etc/init.d/04modules:/system/etc/init.d/04modules \
-    device/htc/dream-sapphire/prebuilt/etc/init.d/04sys_dex_loc:/system/etc/init.d/04sys_dex_loc \
     device/htc/dream-sapphire/prebuilt/etc/init.d/05mountsd:/system/etc/init.d/05mountsd \
+    device/htc/dream-sapphire/prebuilt/etc/init.d/06SetEnv:/system/etc/init.d/06SetEnv \
     device/htc/dream-sapphire/prebuilt/etc/init.d/06BindCache:/system/etc/init.d/06BindCache \
     device/htc/dream-sapphire/prebuilt/etc/init.d/10apps2sd:/system/etc/init.d/10apps2sd \
     device/htc/dream-sapphire/prebuilt/etc/init.d/20userinit:/system/etc/init.d/20userinit
