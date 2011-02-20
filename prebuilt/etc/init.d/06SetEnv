@@ -98,7 +98,7 @@ minDLCache=`expr 50 \* 1024` # 50mb , max market d/l is currently 50mb
 if [ "$sdext_free" -gt "$cache_free" ];
 then
     AltDownloadCache="/sd-ext/download"
-elif [ "$cache_free" -lt "$minDLCache" -a "$data_free" -gt "`expr $cache_free \* 2`$" -o "$data_free" -gt "`expr $minDLCache \* 2`" ];
+elif [ "$cache_free" -lt "$minDLCache" -a "$data_free" -gt "`expr $cache_free \* 2`" -o "$data_free" -gt "`expr $minDLCache \* 2`" ];
 then
     AltDownloadCache="/data/download"
     # TODO Factor in the 10% 'reserve'
