@@ -17,7 +17,8 @@
 DEVICE_PACKAGE_OVERLAYS := device/htc/dream-sapphire/overlay
 
 PRODUCT_PACKAGES := \
-    bash
+    bash \
+    e2fsck
 
 # Install the features available on this device.
 PRODUCT_COPY_FILES := \
