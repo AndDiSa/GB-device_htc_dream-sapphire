@@ -10,7 +10,12 @@ then
     # 28311552 is 27mb ( cache size of 1.33.0013d )
     # if it is less than that we assume customMTD has been used and cache is probably very small
     # thus we need to run the rest of the script
-    # if not, just exit
+    # if not, just exit, but check before whether /cache/dalvik-cache exists
+    if [ ! -d /cache/dalvik-cache ];
+    then
+        busybox install -m 771 -o 1000 -g 1000 -d /cache/dalvik-cache
+    fi
+
     exit
 fi
 busybox umount /cache
