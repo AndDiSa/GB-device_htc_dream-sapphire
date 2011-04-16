@@ -14,7 +14,7 @@ case "$1" in
       modprobe $MODULE
       rzscontrol $DEV --disksize_kb=$2 --init
       swapon $DEV
-      echo 10 > /proc/sys/vm/swappiness
+      echo $3 > /proc/sys/vm/swappiness
    ;;
 
    stop)

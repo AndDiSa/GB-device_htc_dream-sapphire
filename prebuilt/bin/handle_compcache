@@ -9,6 +9,8 @@ if [ `getprop persist.service.compcache` == 1 ];
 then
   PROP=`getprop ro.compcache.default`
   setprop persist.service.compcache $PROP
+  CCSWP=`getprop ro.compcache.swappiness`
+  setprop persist.service.swappiness $CCSWP
 fi
 
 if [ -e /data/property/persist.service.compcache ];
@@ -19,10 +21,18 @@ else
   setprop persist.service.compcache $PROP
 fi
 
+if [ -e /data/property/persist.service.swappiness ];
+then
+  CCSWP=`getprop persist.service.swappiness`
+else
+  CCSWP=`getprop ro.compcache.swappiness`
+  setprop persist.service.swappiness $CCSWP
+fi
+
 if [ $PROP != 0 ]
 then
   CCSIZE=$(($(($MEMTOTAL * $PROP)) / 100))
-  `dirname $0`/compcache start $CCSIZE
+  `dirname $0`/compcache start $CCSIZE $CCSWP
 else
   `dirname $0`/compcache stop
 fi
