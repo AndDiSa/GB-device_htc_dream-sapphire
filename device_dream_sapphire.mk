@@ -87,6 +87,14 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.heapsize=18m
 
+# Set default zram size
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.zram.default=8
+
+# Set default zram swappiness
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.zram.swappiness=10
+
 #Set purgeable assets to save ram on low mem devices
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.purgeable_assets=1
