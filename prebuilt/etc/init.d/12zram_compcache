@@ -6,16 +6,16 @@ LOGINFO='log -p i -t zram '
 LOGWARN='log -p w -t zram '
 
 zsize=`getprop persist.zram.size unknown`
-swappiness=`getprop persist.system.swappiness unknown`
+swappiness=`getprop persist.service.swappiness unknown`
 
 if [[ -e /data/property/persist.zram.size ]]
 then
     zsize=`cat  /data/property/persist.zram.size`
 fi
 
-if [[ -e /data/property/persist.system.swappiness ]]
+if [[ -e /data/property/persist.service.swappiness ]]
 then                                                
-    swappiness=`cat  /data/property/persist.system.swappiness`
+    swappiness=`cat  /data/property/persist.service.swappiness`
 fi                                                            
 
 if [ "$zsize" == "unknown" ]
