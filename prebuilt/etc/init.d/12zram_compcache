@@ -13,6 +13,11 @@ then
     zsize=`cat  /data/property/persist.zram.size`
 fi
 
+if [[ -e /data/property/persist.system.swappiness ]]
+then                                                
+    swappiness=`cat  /data/property/persist.system.swappiness`
+fi                                                            
+
 if [ "$zsize" == "unknown" ]
 then
     $LOGWARN "persist.zram.size not set: use default"
@@ -35,7 +40,7 @@ fi
 
 if [[ "$swappiness" == "unknown" ]]
 then
-    swappiness = 25
+    swappiness=25
 fi
 
 #now see if the kernel supports zswap
@@ -55,6 +60,8 @@ then
     $LOGINFO "zsize is zero, compcache disabled"
     exit 0
 fi
+
+$LOGINFO "setting swappiness to $swappiness"
 
 #prepare vm subsystem
 echo 1 > /proc/sys/vm/drop_caches
