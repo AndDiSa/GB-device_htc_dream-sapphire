@@ -4,9 +4,21 @@
 
 BB="logwrapper busybox";
 
+domount=0
+if [[ -e /data/property/persist.sys.magpie.allow ]];
+then
+    domount=`cat /data/property/persist.sys.magpie.allow`
+fi;
+
 if [ "$SD_EXT_DIRECTORY" = "" ];
 then
     SD_EXT_DIRECTORY=/sd-ext;
+fi;
+
+if [ "$domount" == "0" ];
+then
+    log -p i -t mountsd "User has not enabled magpie a2sd mounting.. skipping"
+    exit 0
 fi;
 
 # find first linux partition on SD card

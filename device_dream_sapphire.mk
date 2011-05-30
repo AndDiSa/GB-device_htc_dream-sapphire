@@ -37,7 +37,10 @@ PRODUCT_COPY_FILES += \
 
 #Copy init.d scripts
 PRODUCT_COPY_FILES += \
+    device/htc/dream-sapphire/prebuilt/etc/init.d/00banner:system/etc/init.d/00banner \
     device/htc/dream-sapphire/prebuilt/etc/init.d/04modules:system/etc/init.d/04modules \
+    device/htc/dream-sapphire/prebuilt/etc/init.d/05mountsd:system/etc/init.d/05mountsd \
+    device/htc/dream-sapphire/prebuilt/etc/init.d/10apps2sd:system/etc/init.d/10apps2sd \
     device/htc/dream-sapphire/prebuilt/etc/init.d/12zram_compcache:system/etc/init.d/12zram_compcache
 
 #Copy audio profiles
@@ -66,7 +69,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # This only affects the case in which there are remembered access points,
 # but none are in range.
 PRODUCT_PROPERTY_OVERRIDES += \
-    wifi.supplicant_scan_interval=15
+    wifi.supplicant_scan_interval=30
 
 # density in DPI of the LCD of this board. This is used to scale the UI
 # appropriately. If this property is not defined, the default value is 160 dpi. 
@@ -102,6 +105,20 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Build ID for protected market apps
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.build.fingerprint=google/soju/crespo:2.3.3/GRI40/102588:user/release-keys
+
+#rom identification
+ifneq ($(ROMMANAGER_MOD_ID),)
+ifneq ($(ROMMANAGER_DEVELOPER_ID),)
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.rommanager.developerid=$(ROMMANAGER_DEVELOPER_ID)
+endif
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.modversion=ezGingerbread-$(ROMMANAGER_MOD_ID)
+else
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.modversion=ezGingerbread-KANGED
+endif
+
 
 # media configuration xml file
 PRODUCT_COPY_FILES += \
