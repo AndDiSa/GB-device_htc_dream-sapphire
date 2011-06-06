@@ -102,6 +102,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.purgeable_assets=1
 
+#include ueventd.ds.rc when loading uevent rules
+BOARD_INIT_USES_DS_UEVENT:=true
+
 # Build ID for protected market apps
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.build.fingerprint=google/soju/crespo:2.3.3/GRI40/102588:user/release-keys
