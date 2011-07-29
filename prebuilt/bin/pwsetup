@@ -1,0 +1,97 @@
+#!/system/bin/sh
+
+# Vars
+PW_VERSION="0.0.1";
+
+# Read in the current config
+pwconfig=`sqlite3 /data/data/com.android.providers.settings/databases/settings.db "select value from system where name='expanded_widget_buttons';"`
+if ["$pwconfig" == ""];
+then
+	pwconfig="wifi|bluetooth|gps|sound";
+fi;
+
+
+# Display Menu
+clear;
+echo;
+echo "      Power Widget Setup Script - v0.0.1";
+echo;
+echo "Current Power Widget configuration: $pwconfig";
+echo;
+echo '
+	Please define new configuration string
+	======================================
+	1 - wifi
+	2 - gps
+        3 - bluetooth
+        4 - brightness
+	5 - sound
+        6 - sync
+        7 - mobiledata
+        8 - networkmode
+        9 - airplane
+
+        Please enter your configuration string, i.e. 1389 -> wifi|bluetooth|networkmode|airplane
+
+
+';
+echo -n "New config: ";
+read -r pw_config;
+
+
+# Input Validation
+if [ `echo "$pw_config" | grep -cE '^[0-9][0-9]*$'` -eq 0 ] ||
+   [ `expr "$pw_config"` -lt 1 ] || [ `expr "$pw_config"` -gt 987654 ]
+then
+	echo;
+	echo "Error: ""$pw_config"" is not a valid option!"
+	echo;
+	exit;
+fi
+while read -n 1 c; do
+   if [ "x${new_config}" != "x" ];
+   then
+      new_config="${new_config}|";
+   fi;
+   case "$c" in
+   1)
+      new_config="${new_config}wifi";
+   ;;
+   2)
+      new_config="${new_config}gps";
+   ;;
+   3)
+      new_config="${new_config}bluetooth";
+   ;;
+   4)
+      new_config="${new_config}brightness";
+   ;;
+   5)
+      new_config="${new_config}sound";
+   ;;
+   6)
+      new_config="${new_config}sync";
+   ;;
+   7)
+      new_config="${new_config}mobiledata";
+   ;;
+   8)
+      new_config="${new_config}networkmode";
+   ;;
+   9)
+      new_config="${new_config}airplane";
+   ;;
+   *)
+   ;;
+   esac;
+done<<EOF
+${pw_config}
+EOF
+
+new_config=`echo "${new_config}" | sed "s/|$//"`
+new_config="'${new_config}'"
+sqlite3 /data/data/com.android.providers.settings/databases/settings.db "delete from system where name='expanded_widget_buttons';"
+sqlite3 /data/data/com.android.providers.settings/databases/settings.db "insert into system (name,value) values ('expanded_widget_buttons',${new_config});"
+
+echo "New configuration ${new_config} will be activated after reboot ... "
+

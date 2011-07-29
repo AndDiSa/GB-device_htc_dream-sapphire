@@ -6,11 +6,17 @@ LOGINFO='log -p i -t zram '
 LOGWARN='log -p w -t zram '
 
 zsize=`getprop persist.zram.size unknown`
+swappiness=`getprop persist.service.swappiness unknown`
 
 if [[ -e /data/property/persist.zram.size ]]
 then
     zsize=`cat  /data/property/persist.zram.size`
 fi
+
+if [[ -e /data/property/persist.service.swappiness ]]
+then                                                
+    swappiness=`cat  /data/property/persist.service.swappiness`
+fi                                                            
 
 if [ "$zsize" == "unknown" ]
 then
@@ -32,6 +38,11 @@ else
     $LOGINFO "persist.zram.size set to $zsize Mb"
 fi
 
+if [[ "$swappiness" == "unknown" ]]
+then
+    swappiness=25
+fi
+
 #now see if the kernel supports zswap
 if [[ -e /sys/block/zram0/disksize ]]
 then
@@ -50,9 +61,11 @@ then
     exit 0
 fi
 
+$LOGINFO "setting swappiness to $swappiness"
+
 #prepare vm subsystem
 echo 1 > /proc/sys/vm/drop_caches
-echo 25 > /proc/sys/vm/swappiness
+echo $swappiness > /proc/sys/vm/swappiness
 echo 1 > /proc/sys/vm/page-cluster
 
 #setup compcache
