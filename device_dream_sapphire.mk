@@ -16,6 +16,10 @@
 
 DEVICE_PACKAGE_OVERLAYS := device/htc/dream-sapphire/overlay
 
+PRODUCT_PACKAGES := \
+    bash \
+    e2fsck
+
 # Install the features available on this device.
 PRODUCT_COPY_FILES := \
     frameworks/base/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
@@ -23,7 +27,7 @@ PRODUCT_COPY_FILES := \
     frameworks/base/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
     frameworks/base/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
     frameworks/base/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
-    frameworks/base/data/etc/android.hardware.touchscreen.multitouch.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.xml \
+    frameworks/base/data/etc/android.hardware.touchscreen.multitouch.distinct.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.distinct.xml \
     frameworks/base/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
     frameworks/base/data/etc/android.software.sip.xml:system/etc/permissions/android.software.sip.xml \
     frameworks/base/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml
@@ -85,6 +89,14 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.heapsize=18m
 
+# Set default zram size
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.zram.default=8
+
+# Set default zram swappiness
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.zram.swappiness=10
+
 #Set purgeable assets to save ram on low mem devices
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.purgeable_assets=1
@@ -94,7 +106,7 @@ BOARD_INIT_USES_DS_UEVENT:=true
 
 # Build ID for protected market apps
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.build.fingerprint=google/soju/crespo:2.3.1/GRH78/85442:user/release-keys
+    ro.build.fingerprint=google/soju/crespo:2.3.3/GRI40/102588:user/release-keys
 
 #rom identification
 ifneq ($(ROMMANAGER_MOD_ID),)
@@ -113,6 +125,17 @@ endif
 # media configuration xml file
 PRODUCT_COPY_FILES += \
     device/htc/dream-sapphire/media_profiles.xml:/system/etc/media_profiles.xml
+
+# boot scripts
+PRODUCT_COPY_FILES += \
+    device/htc/dream-sapphire/prebuilt/etc/init.d/00banner:/system/etc/init.d/00banner \
+    device/htc/dream-sapphire/prebuilt/etc/init.d/03firstboot:/system/etc/init.d/03firstboot \
+    device/htc/dream-sapphire/prebuilt/etc/init.d/04modules:/system/etc/init.d/04modules \
+    device/htc/dream-sapphire/prebuilt/etc/init.d/05mountsd:/system/etc/init.d/05mountsd \
+    device/htc/dream-sapphire/prebuilt/etc/init.d/06SetEnv:/system/etc/init.d/06SetEnv \
+    device/htc/dream-sapphire/prebuilt/etc/init.d/06BindCache:/system/etc/init.d/06BindCache \
+    device/htc/dream-sapphire/prebuilt/etc/init.d/10apps2sd:/system/etc/init.d/10apps2sd \
+    device/htc/dream-sapphire/prebuilt/etc/init.d/20userinit:/system/etc/init.d/20userinit
 
 #System module location (for busybox modprobe)
 KERNEL_MODULES_DIR=/system/lib/modules

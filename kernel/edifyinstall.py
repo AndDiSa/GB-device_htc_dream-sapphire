@@ -91,6 +91,30 @@ echo "sysboard=$board" >> /tmp/nfo.prop
 """
     common.ZipWriteStr(output_zip,"checksys.sh",checksys)
 
+def generate_repackboot(output_zip):
+    repackboot  = \
+"""#!/sbin/sh
+# customMTD boot only patcher
+# get mtdparts from running recovery and patch boot.img with it
+# Firerat 2011-01-17
+KCMDline="mtdparts`cat /proc/cmdline|awk -Fmtdparts '{print $2}'`"
+if [ "$KCMDline" = "mtdparts" ];
+then
+    # we shouldn't be running this script if no customMTD
+    # but just in case exit here if no mtdparts found
+    exit
+fi
+/tmp/unpackbootimg /tmp/boot.img /tmp/
+origcmdline=`awk '{gsub(/\ .\ /,"");sub(/mtdparts.+)/,"");print}' /tmp/boot.img-cmdline|awk '{$1=$1};1'`
+/tmp/mkbootimg --kernel /tmp/boot.img-zImage \
+               --ramdisk /tmp/boot.img-ramdisk.gz \
+               --cmdline "$origcmdline $KCMDline" \
+               --base `cat /tmp/boot.img-base` \
+               -o /tmp/boot.img
+
+rm /tmp/boot.img-*
+"""
+    common.ZipWriteStr(output_zip,"AutoCMTD/repackboot.sh",repackboot)
 
 def make_boot_install(script,boot_img,input_zip,output_zip):
     android_root=os.getenv("ANDROID_BUILD_TOP")
@@ -146,7 +170,23 @@ def make_boot_install(script,boot_img,input_zip,output_zip):
 
     #add in checksys.sh
     generate_checksys(output_zip)
-    
+
+    #add in repackboot.sh
+    generate_repackboot(output_zip)
+
+    #copy in bootimg tools
+    fp=open(os.path.join(android_root,
+              "device","htc","dream-sapphire","AutoCMTD","mkbootimg"),
+              "rb")
+    common.ZipWriteStr(output_zip,"AutoCMTD/mkbootimg",fp.read())
+    fp.close()
+
+    fp=open(os.path.join(android_root,
+              "device","htc","dream-sapphire","AutoCMTD","unpackbootimg"),
+              "rb")
+    common.ZipWriteStr(output_zip,"AutoCMTD/unpackbootimg",fp.read())
+    fp.close()
+
     #add eddify
     script.ShowProgress(0.2, 0)
     script.ShowProgress(0.2, 10)
@@ -195,10 +235,18 @@ else
                              "/system/lib/modules/modules.sqf");
     endif;
 endif;
-## TODO ADD AUTO CUSTOM-MTD logic to /tmp/boot.img here ##
+if file_getprop("/tmp/nfo.prop","custommtd") == "CustomMTD"
+then
+    ui_print("Patching boot.img with CustomMTD");
+    package_extract_dir("AutoCMTD", "/tmp");
+    set_perm(0, 0, 0700, "/tmp/mkbootimg");
+    set_perm(0, 0, 0700, "/tmp/unpackbootimg");
+    set_perm(0, 0, 0700, "/tmp/repackboot.sh");
+    run_program("/tmp/repackboot.sh");
+endif;
 ui_print("Write boot.img");
 assert(write_raw_image("/tmp/boot.img","boot"));
-delete("/tmp/checksys.sh","/tmp/boot.img");
+delete("/tmp/checksys.sh","/tmp/repackboot.sh","/tmp/boot.img");
 
 #END INSTALL boot.img
 
