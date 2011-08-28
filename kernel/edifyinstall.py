@@ -171,22 +171,15 @@ def make_boot_install(script,boot_img,input_zip,output_zip):
     #add in checksys.sh
     generate_checksys(output_zip)
 
-    #add in repackboot.sh
-    generate_repackboot(output_zip)
-
-    #copy in bootimg tools
+    #add in bootcmdutil
+    #out/target/product/sapphire/obj/EXECUTABLES/bootcmdutil_intermediates/bootcmdutil
     fp=open(os.path.join(android_root,
-              "device","htc","dream-sapphire","AutoCMTD","mkbootimg"),
+              "out","target","product","sapphire","obj","EXECUTABLES",
+              "bootcmdutil_intermediates","bootcmdutil"),
               "rb")
-    common.ZipWriteStr(output_zip,"AutoCMTD/mkbootimg",fp.read())
+    common.ZipWriteStr(output_zip,"kernel/bootcmdutil",fp.read())
     fp.close()
-
-    fp=open(os.path.join(android_root,
-              "device","htc","dream-sapphire","AutoCMTD","unpackbootimg"),
-              "rb")
-    common.ZipWriteStr(output_zip,"AutoCMTD/unpackbootimg",fp.read())
-    fp.close()
-
+    
     #add eddify
     script.ShowProgress(0.2, 0)
     script.ShowProgress(0.2, 10)
@@ -235,6 +228,7 @@ else
                              "/system/lib/modules/modules.sqf");
     endif;
 endif;
+<<<<<<< HEAD
 if file_getprop("/tmp/nfo.prop","custommtd") == "CustomMTD"
 then
     ui_print("Patching boot.img with CustomMTD");
@@ -244,6 +238,25 @@ then
     set_perm(0, 0, 0700, "/tmp/repackboot.sh");
     run_program("/tmp/repackboot.sh");
 endif;
+=======
+
+#add the cMTD Command line if needed
+if file_getprop("/tmp/nfo.prop","custommtd") == "CustomMTD"
+then
+    #extract recovery's command line option (thanks to Firerat)
+    run_program("/sbin/sh","-c",
+        "echo mtdparts`cat /proc/cmdline|awk -Fmtdparts '{print $2}'` >> /tmp/nfo.prop"
+        );
+    package_extract_file("kernel/bootcmdutil","/tmp/bootcmdutil");
+    set_perm(0,0,755,"/tmp/bootcmdutil");
+    ui_print("Applying cMTD to boot.img");
+    run_program("/tmp/bootcmdutil","append","/tmp/boot.img",
+                concat("mtdparts=",file_getprop("/tmp/nfo.prop","mtdparts"))
+               );
+    delete("/tmp/bootcmdutil");
+endif;
+
+>>>>>>> gh/gingerbread
 ui_print("Write boot.img");
 assert(write_raw_image("/tmp/boot.img","boot"));
 delete("/tmp/checksys.sh","/tmp/repackboot.sh","/tmp/boot.img");
