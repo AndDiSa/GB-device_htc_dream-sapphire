@@ -228,17 +228,6 @@ else
                              "/system/lib/modules/modules.sqf");
     endif;
 endif;
-<<<<<<< HEAD
-if file_getprop("/tmp/nfo.prop","custommtd") == "CustomMTD"
-then
-    ui_print("Patching boot.img with CustomMTD");
-    package_extract_dir("AutoCMTD", "/tmp");
-    set_perm(0, 0, 0700, "/tmp/mkbootimg");
-    set_perm(0, 0, 0700, "/tmp/unpackbootimg");
-    set_perm(0, 0, 0700, "/tmp/repackboot.sh");
-    run_program("/tmp/repackboot.sh");
-endif;
-=======
 
 #add the cMTD Command line if needed
 if file_getprop("/tmp/nfo.prop","custommtd") == "CustomMTD"
@@ -256,7 +245,6 @@ then
     delete("/tmp/bootcmdutil");
 endif;
 
->>>>>>> gh/gingerbread
 ui_print("Write boot.img");
 assert(write_raw_image("/tmp/boot.img","boot"));
 delete("/tmp/checksys.sh","/tmp/repackboot.sh","/tmp/boot.img");
