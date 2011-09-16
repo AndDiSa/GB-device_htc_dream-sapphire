@@ -89,7 +89,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Set the vm heapsize to 18MB
 PRODUCT_PROPERTY_OVERRIDES += \
-    dalvik.vm.heapsize=18m
+    dalvik.vm.heapsize=24m
 
 # Set default zram size
 PRODUCT_PROPERTY_OVERRIDES += \
