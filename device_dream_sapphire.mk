@@ -54,6 +54,7 @@ PRODUCT_COPY_FILES += \
 #Copy prebuilt files
 PRODUCT_COPY_FILES += \
     device/htc/dream-sapphire/prebuilt/bin/fix_permissions:system/bin/fix_permissions \
+    device/htc/dream-sapphire/prebuilt/xbin/update_ksm:system/xbin/update_ksm \
     device/htc/dream-sapphire/prebuilt/etc/init.local.rc:system/etc/init.local.rc \
     device/htc/dream-sapphire/prebuilt/build.trout.prop:system/build.trout.prop
 
