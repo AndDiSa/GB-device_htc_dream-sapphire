@@ -17,6 +17,3 @@ df -h /cache | tail -n 1 | awk '
 
 #cleanup cache of extra *.apk downloads
 rm -rf /cache/downloadfile*.apk
-
-#startup ntpd client to synchronize clock
-/system/xbin/ntpd -p pool.ntp.org
