@@ -21,7 +21,7 @@ BUILD_TARGET_EXTRA_OTABOOT_INSTALL_SCRIPT := \
 endif
 
 file := $(INSTALLED_KERNEL_TARGET)
-ALL_PREBUILT += $(file)
+PRODUCT_COPY_FILE += $(file)
 $(file): $(TARGET_PREBUILT_KERNEL) | $(ACP)
 	$(transform-prebuilt-to-target)
 
@@ -29,19 +29,19 @@ $(call add-radio-file,recovery/images/firmware_error.565)
 $(call add-radio-file,recovery/images/bitmap_size.txt)
 
 file := $(TARGET_OUT_KEYLAYOUT)/h2w_headset.kl
-ALL_PREBUILT += $(file)
+PRODUCT_COPY_FILE  += $(file)
 $(file) : $(LOCAL_PATH)/h2w_headset.kl | $(ACP)
 	$(transform-prebuilt-to-target)
 
 file := $(TARGET_ROOT_OUT)/sbin/sysinit.rc
-ALL_PREBUILT += $(file)
+PRODUCT_COPY_FILE  += $(file)
 $(file) : $(LOCAL_PATH)/prebuilt/sbin/sysinit.rc | $(ACP)
 	$(transform-prebuilt-to-target)
 
 file := $(TARGET_ROOT_OUT)/ueventd.ds.rc
-ALL_PREBUILT += $(file)
+PRODUCT_COPY_FILE += $(file)
 $(file) : $(LOCAL_PATH)/prebuilt/ueventd.ds.rc | $(ACP)
-	$(transform-prebuilt-to-target)
+$(transform-prebuilt-to-target)
 
 include $(CLEAR_VARS)
 LOCAL_MODULE_CLASS := ETC

@@ -19,6 +19,8 @@
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!-- Make launcher run in acore. -->
+<!--
     <string name="sharedUserId" translate="false"><xliff:g id="x">android.uid.shared</xliff:g></string>
     <string name="process" translate="false"><xliff:g id="x">android.process.acore</xliff:g></string>
+-->
 </resources>
