@@ -95,7 +95,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Set default zram size
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.zram.default=8
+    ro.zram.default=16
 
 # Set default zram swappiness
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -119,12 +119,18 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.rommanager.developerid=$(ROMMANAGER_DEVELOPER_ID)
 endif
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.modversion=ezGingerbread-$(ROMMANAGER_MOD_ID)
+    ro.modversion=ADS-ICS-$(ROMMANAGER_MOD_ID)
 else
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.modversion=ezGingerbread-KANGED
+    ro.modversion=ADS-ICS
 endif
 
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.secure=0 \
+    ro.allow.mock.location=0 \
+    ro.debuggable=1 \
+    persist.service.adb.enable=1 \
+    persist.sys.usb.config=adb 
 
 # media configuration xml file
 PRODUCT_COPY_FILES += \
@@ -139,6 +145,7 @@ PRODUCT_COPY_FILES += \
     device/htc/dream-sapphire/prebuilt/etc/init.d/06SetEnv:/system/etc/init.d/06SetEnv \
     device/htc/dream-sapphire/prebuilt/etc/init.d/06BindCache:/system/etc/init.d/06BindCache \
     device/htc/dream-sapphire/prebuilt/etc/init.d/10apps2sd:/system/etc/init.d/10apps2sd \
+    device/htc/dream-sapphire/prebuilt/etc/init.d/12zram_compcache:/system/etc/init.d/12zram_compcache \
     device/htc/dream-sapphire/prebuilt/etc/init.d/20userinit:/system/etc/init.d/20userinit
 
 #System module location (for busybox modprobe)
