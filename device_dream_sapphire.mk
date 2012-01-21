@@ -136,6 +136,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_COPY_FILES += \
     device/htc/dream-sapphire/media_profiles.xml:/system/etc/media_profiles.xml
 
+PRODUCT_COPY_FILES += \
+    device/htc/dream-sapphire/synaptics-rmi-touchscreen.idc:/system/usr/idc/synaptics-rmi-touchscreen.idc
+
 # boot scripts
 PRODUCT_COPY_FILES += \
     device/htc/dream-sapphire/prebuilt/etc/init.d/00banner:/system/etc/init.d/00banner \
