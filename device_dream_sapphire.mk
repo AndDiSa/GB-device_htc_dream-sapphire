@@ -40,10 +40,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     device/htc/dream-sapphire/prebuilt/etc/init.d/00banner:system/etc/init.d/00banner \
     device/htc/dream-sapphire/prebuilt/etc/init.d/04modules:system/etc/init.d/04modules \
-    device/htc/dream-sapphire/prebuilt/etc/init.d/05mountsd:system/etc/init.d/05mountsd \
-    device/htc/dream-sapphire/prebuilt/etc/init.d/06BindCache:system/etc/init.d/06BindCache \
-    device/htc/dream-sapphire/prebuilt/etc/init.d/10apps2sd:system/etc/init.d/10apps2sd \
-    device/htc/dream-sapphire/prebuilt/etc/init.d/11firstboot:system/etc/init.d/11firstboot \
     device/htc/dream-sapphire/prebuilt/etc/init.d/12zram_compcache:system/etc/init.d/12zram_compcache
 
 #Copy audio profiles
@@ -57,7 +53,7 @@ PRODUCT_COPY_FILES += \
     device/htc/dream-sapphire/prebuilt/bin/fix_permissions:system/bin/fix_permissions \
     device/htc/dream-sapphire/prebuilt/xbin/update_ksm:system/xbin/update_ksm \
     device/htc/dream-sapphire/prebuilt/etc/init.local.rc:system/etc/init.local.rc \
-    device/htc/dream-sapphire/prebuilt/build.trout.prop:system/build.trout.prop
+    device/htc/dream-sapphire/prebuilt/build.trout.prop:system/build.trout.prop 
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.media.dec.jpeg.memcap=10000000
@@ -141,14 +137,6 @@ PRODUCT_COPY_FILES += \
 
 # boot scripts
 PRODUCT_COPY_FILES += \
-    device/htc/dream-sapphire/prebuilt/etc/init.d/00banner:/system/etc/init.d/00banner \
-    device/htc/dream-sapphire/prebuilt/etc/init.d/03firstboot:/system/etc/init.d/03firstboot \
-    device/htc/dream-sapphire/prebuilt/etc/init.d/04modules:/system/etc/init.d/04modules \
-    device/htc/dream-sapphire/prebuilt/etc/init.d/05mountsd:/system/etc/init.d/05mountsd \
-    device/htc/dream-sapphire/prebuilt/etc/init.d/06SetEnv:/system/etc/init.d/06SetEnv \
-    device/htc/dream-sapphire/prebuilt/etc/init.d/06BindCache:/system/etc/init.d/06BindCache \
-    device/htc/dream-sapphire/prebuilt/etc/init.d/10apps2sd:/system/etc/init.d/10apps2sd \
-    device/htc/dream-sapphire/prebuilt/etc/init.d/12zram_compcache:/system/etc/init.d/12zram_compcache \
     device/htc/dream-sapphire/prebuilt/etc/init.d/20userinit:/system/etc/init.d/20userinit
 
 #System module location (for busybox modprobe)
