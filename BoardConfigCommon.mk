@@ -20,7 +20,10 @@
 # WARNING: This line must come *before* including the proprietary
 # variant, so that it gets overwritten by the parent (which goes
 # against the traditional rules of inheritance).
-USE_CAMERA_STUB := true
+USE_CAMERA_STUB := false
+ 
+BOARD_USES_QCOM_LIBS := true
+BOARD_USES_QCOM_LIBRPC := true
 
 -include vendor/htc/sapphire/BoardConfigVendor.mk
 

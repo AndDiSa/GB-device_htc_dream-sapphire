@@ -18,7 +18,7 @@ DEVICE_PACKAGE_OVERLAYS := device/htc/dream-sapphire/overlay
 
 PRODUCT_PACKAGES := \
     bash \
-    e2fsck
+    e2fsck 
 
 # Install the features available on this device.
 PRODUCT_COPY_FILES := \
@@ -28,6 +28,7 @@ PRODUCT_COPY_FILES := \
     frameworks/base/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
     frameworks/base/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
     frameworks/base/data/etc/android.hardware.touchscreen.multitouch.distinct.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.distinct.xml \
+    frameworks/base/data/etc/android.hardware.sensor.compass.xml:system/etc/permissions/android.hardware.sensor.compass.xml \
     frameworks/base/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
     frameworks/base/data/etc/android.software.sip.xml:system/etc/permissions/android.software.sip.xml \
     frameworks/base/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml
@@ -40,6 +41,8 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     device/htc/dream-sapphire/prebuilt/etc/init.d/00banner:system/etc/init.d/00banner \
     device/htc/dream-sapphire/prebuilt/etc/init.d/04modules:system/etc/init.d/04modules \
+    device/htc/dream-sapphire/prebuilt/etc/init.d/06BindCache:system/etc/init.d/06BindCache \
+    device/htc/dream-sapphire/prebuilt/etc/init.d/11firstboot:system/etc/init.d/firstboot \
     device/htc/dream-sapphire/prebuilt/etc/init.d/12zram_compcache:system/etc/init.d/12zram_compcache
 
 #Copy audio profiles
@@ -54,7 +57,10 @@ PRODUCT_COPY_FILES += \
     device/htc/dream-sapphire/prebuilt/bin/sysinit:system/bin/sysinit \
     device/htc/dream-sapphire/prebuilt/xbin/update_ksm:system/xbin/update_ksm \
     device/htc/dream-sapphire/prebuilt/etc/init.local.rc:system/etc/init.local.rc \
-    device/htc/dream-sapphire/prebuilt/build.trout.prop:system/build.trout.prop 
+    device/htc/dream-sapphire/prebuilt/build.trout.prop:system/build.trout.prop \
+    device/htc/dream-sapphire/prebuilt/init.trout.rc:root/init.trout.rc \
+    device/htc/dream-sapphire/prebuilt/init.sapphire.rc:root/init.sapphire.rc 
+
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.media.dec.jpeg.memcap=10000000
@@ -86,9 +92,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     debug.sf.hw=1 \
     ro.opengles.version=65537
 
-# Set the vm heapsize to 18MB
+# Set the vm heapsize to 24MB
 PRODUCT_PROPERTY_OVERRIDES += \
-    dalvik.vm.heapsize=24m
+    dalvik.vm.heapsize=24m \
+    dalvik.vm.dexopt-data-only=1
 
 # Set default zram size
 PRODUCT_PROPERTY_OVERRIDES += \
