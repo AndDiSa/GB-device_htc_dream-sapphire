@@ -26,8 +26,8 @@ then
     smisize=`awk '{m=match($0,/smisize=([0-9a-zA-Z\.]*)/) ; print(substr($0,RSTART+8,RLENGTH-8))}' < /proc/cmdline`
     if [ "$smisize" == "64" ]
     then
-        setprop persist.zram.size   8
-        zsize=8
+        setprop persist.zram.size  16 
+        zsize=16
         $LOGINFO Compcache enabled by default on 32b device
     else
         setprop persist.zram.size   0

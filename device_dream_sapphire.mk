@@ -105,6 +105,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.zram.swappiness=10
 
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.sys.ksmenable=1
+
 #Set purgeable assets to save ram on low mem devices
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.purgeable_assets=1

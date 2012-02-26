@@ -20,7 +20,7 @@
 # WARNING: This line must come *before* including the proprietary
 # variant, so that it gets overwritten by the parent (which goes
 # against the traditional rules of inheritance).
-USE_CAMERA_STUB := false
+USE_CAMERA_STUB := true
  
 BOARD_USES_QCOM_LIBS := true
 BOARD_USES_QCOM_LIBRPC := true
@@ -51,17 +51,48 @@ TARGET_BOOTLOADER_LINK_SCRIPT := \
 
 BOARD_KERNEL_CMDLINE := no_console_suspend=1 console=null
 
+BOARD_USES_GENERIC_AUDIO := false
+
 BOARD_HAVE_BLUETOOTH := true
 
 BOARD_VENDOR_USE_AKMD := akm8976
 
 BOARD_VENDOR_QCOM_AMSS_VERSION := 6220
 
+#BOARD_USES_QCOM_HARDWARE := true
+
 # The size of a block that can be marked bad.
 BOARD_FLASH_BLOCK_SIZE := 131072
 
+TARGET_HARDWARE_3D := false
+
 # OpenGL drivers config file path
 BOARD_EGL_CFG := device/htc/dream-sapphire/egl.cfg
+
+BOARD_USE_HTC_LIBSENSORS := true
+
+BOARD_USES_QCOM_LIBS := true
+
+BUILD_LIBCAMERA := true
+BOARD_CAMERA_LIBRARIES := libcameraservice libcamera
+USE_CAMERA_STUB:= false
+
+BOARD_USES_GPSSHIM := true
+
+BOARD_GPS_NEEDS_XTRA := true
+
+TARGET_LIBAGL_USE_GRALLOC_COPYBITS := true
+
+BOARD_USE_LEGACY_TOUCHSCREEN := true
+
+BOARD_NO_RGBX_8888 := true
+
+WITH_DEXPREOPT := false
+
+JS_ENGINE := v8
+
+# Stagefright fully enabled
+BUILD_WITH_FULL_STAGEFRIGHT := true
 
 #Enable Cyanogen Bionic for use in busybox only
 CYANOGEN_BIONIC := true
@@ -81,3 +112,6 @@ AVOID_DRAW_TEXTURE_EXTENSION := true
 TARGET_RECOVERY_UPDATER_LIBS += librecovery_updater_htc
 
 TARGET_RELEASETOOLS_EXTENSIONS := device/htc/common
+
+#WITH_DEXPREOPT := true
+
