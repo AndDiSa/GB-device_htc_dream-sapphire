@@ -17,8 +17,27 @@
 DEVICE_PACKAGE_OVERLAYS := device/htc/dream-sapphire/overlay
 
 PRODUCT_PACKAGES := \
-    bash \
-    e2fsck 
+    sensors.sapphire sensors.trout \
+    gps.sapphire     gps.trout
+
+# libs and tools
+PRODUCT_PACKAGES += \
+    wlan_loader \
+    tiwlan.ini \
+    libGLES_android \
+    rsg-generator \
+    libRS \
+    librs_jni \
+    libOmxCore \
+    libmm-omxcore \
+    su \
+    vold.fstab \
+    e2fsck \
+    com.android.future.usb.accessory \
+    android.software.live_wallpaper.xml \
+    copybit.msm7k \
+    gralloc.msm7k \
+    lights.msm7k
 
 # Install the features available on this device.
 PRODUCT_COPY_FILES := \
