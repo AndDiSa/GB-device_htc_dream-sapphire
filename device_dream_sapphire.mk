@@ -116,6 +116,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.heapsize=24m \
     dalvik.vm.dexopt-data-only=1
 
+# disable bootanimation for now ...
+PRODUCT_PROPERTY_OVERRIDES += \
+    debug.sf.nobootanimation=1
+
 # Set default zram size
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.zram.default=16
